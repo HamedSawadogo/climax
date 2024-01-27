@@ -12,9 +12,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 public class ClimaxApplication { public static void main(String[] args) {
@@ -31,16 +30,13 @@ public class ClimaxApplication { public static void main(String[] args) {
           String jsonFile="C:\\Users\\Hamed\\IdeaProjects\\climax\\file.json";
           String xmlFile="C:\\Users\\Hamed\\IdeaProjects\\climax\\file.xml";
 
+          String csvFile="C:\\Users\\Hamed\\IdeaProjects\\climax\\file.csv";
 
 
-          climaxService.setFile(FileFactory.createFileReader(jsonFile));
-          List<Employee>employeeList=climaxService.readFile(jsonFile);
 
-          employeeList.forEach(employee -> {
-              System.err.println(employee.getFirstName());
-              System.err.println(employee.getAge());
-              System.err.println(employee.getLastName());
-          });
+          climaxService.setFile(FileFactory.createFileReader(csvFile));
+          climaxService.readFile(csvFile);
+
       };
     }
 

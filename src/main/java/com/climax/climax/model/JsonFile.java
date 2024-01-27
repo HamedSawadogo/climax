@@ -11,7 +11,9 @@ import com.climax.climax.services.FileManager;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 public class JsonFile extends File{
@@ -21,7 +23,7 @@ public class JsonFile extends File{
      * Lire un fichier Json et renvoie la liste des Utilisateurs associés
      */
     @Override
-    public List<Employee> readFile(String filePath) throws IOException, ParseException {
+    public Set<Employee> readFile(String filePath) throws IOException, ParseException {
 
         if(!FileManager.isValidFilePath(filePath))
            throw new FileNotFoundException("ce fichier n'est pas valide");
@@ -31,7 +33,8 @@ public class JsonFile extends File{
 
 
         JSONArray employeesList=(JSONArray)obj;
-        List<Employee>employees=new ArrayList<>();
+        
+        Set<Employee>employees=new HashSet<>();
         //Iterate over employee array
         employeesList.forEach(employeeParam -> {
             JSONObject employeeObject=(JSONObject)employeeParam;

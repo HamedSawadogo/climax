@@ -9,14 +9,16 @@ import com.climax.climax.services.FileManager;
 import javax.xml.parsers.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Slf4j
 public class XMLFile extends File{
 
     @Override
-    public List<Employee> readFile(String filePath) throws IOException, ParserConfigurationException, SAXException {
+    public Set<Employee> readFile(String filePath) throws IOException, ParserConfigurationException, SAXException {
 
         if(!FileManager.isValidFilePath(filePath)){
             throw new FileNotFoundException("ce fichier est invalide!!!");
@@ -31,7 +33,7 @@ public class XMLFile extends File{
         log.info(root.toString());
         NodeList nList = document.getElementsByTagName("employee");
 
-        List<Employee>employeeList=new ArrayList<>();
+        Set<Employee>employeeList=new HashSet<>();
         for (int i = 0; i < nList.getLength(); i++)
         {
             Node node = nList.item(i);

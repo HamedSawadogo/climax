@@ -3,7 +3,7 @@ import org.json.simple.parser.ParseException;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 
 /**
  * represente l'absraction de Fichier
@@ -19,6 +19,6 @@ public abstract class File {
    * @throws ParserConfigurationException
    * @throws SAXException
    */
-  public abstract  List<Employee> readFile(String filePath) throws IOException,
+  public abstract  Set<Employee> readFile(String filePath) throws IOException,
           ParseException, ParserConfigurationException, SAXException;
 }

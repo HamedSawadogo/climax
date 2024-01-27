@@ -7,21 +7,21 @@ import java.util.stream.Collectors;
 
 @Component
 public class EmployeeDaoImpl implements EmployeeDao {
-    private final List<Employee>employees;
+    private final Set<Employee>employees;
 
     public EmployeeDaoImpl() {
-        this.employees = new ArrayList<>();
+        this.employees = new HashSet<>();
     }
     //Ajouter Un fichier d'Employee (composé de 1 ou plusieurs Employées)
     @Override
-    public void addEmployees(List<Employee> employees) {
+    public void addEmployees(Set<Employee> employees) {
         if(employees.isEmpty())throw new NoSuchElementException("la liste des Employees est vide");
         this.employees.addAll(employees);
     }
 
     //Renvoie la liste des Employees en Mémoire
     @Override
-    public List<Employee>getEmployeesList() {
+    public Set<Employee>getEmployeesList() {
         return this.employees;
     }
     /**

@@ -23,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Slf4j
 @Controller
@@ -71,7 +72,7 @@ public class ClimaxController {
             File fileFactory=FileFactory.createFileReader(absoluteFilePath);
             climaxService.setFile(fileFactory);
 
-            List<Employee>employees=climaxService.readFile(absoluteFilePath);
+            Set<Employee>employees=climaxService.readFile(absoluteFilePath);
             employeeDao.addEmployees(employees);
             model.addAttribute("employees",employeeDao.getEmployeesList());
             model.addAttribute("moyennesSalariales",employeeDao.calculateSalaryByDjob());
