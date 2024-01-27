@@ -5,11 +5,12 @@ import com.opencsv.CSVReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
-public class CsvFile implements File{
+public class CsvFile extends File{
 
     @Override
-    public void readFile(String filePath) throws FileNotFoundException {
+    public List<Employee> readFile(String filePath) throws FileNotFoundException {
         CSVReader csvReader = null;
         try {
             csvReader = new CSVReader(new FileReader(filePath));
@@ -20,5 +21,6 @@ public class CsvFile implements File{
         } catch (IOException e) {
             System.out.println(e);
         }
+        return null;
     }
 }

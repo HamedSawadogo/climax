@@ -1,39 +1,46 @@
 package com.climax.climax.model;
+import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class XMLFile implements File{
+@Slf4j
+public class XMLFile extends File{
 
     @Override
-    public void readFile(String filePath) throws IOException, ParserConfigurationException, SAXException {
+    public List<Employee> readFile(String filePath) throws IOException, ParserConfigurationException, SAXException {
+
+        log.info("myFilePath:   "+filePath);
         DocumentBuilderFactory dBfactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = dBfactory.newDocumentBuilder();
-        // Fetch XML File
+
         Document document = builder.parse(new java.io.File(filePath));
         document.getDocumentElement().normalize();
-        //Get root node
-        org.w3c.dom.Element root = document.getDocumentElement();
-        System.out.println(root.getNodeName());
-        //Get all students
-        NodeList nList = document.getElementsByTagName("student");
-        System.out.println(".................................");
 
+        org.w3c.dom.Element root = document.getDocumentElement();
+        NodeList nList = document.getElementsByTagName("employees");
+
+        List<Employee>employees=new ArrayList<>();
         for (int i = 0; i < nList.getLength(); i++)
         {
             Node node = nList.item(i);
-            System.out.println();    //Just a separator
             if (node.getNodeType() == Node.ELEMENT_NODE)
             {
-                //Print each student's detail
                 Element element = (Element) node;
-                System.out.println("Student id : "    + element.getAttribute("id"));
-                System.out.println("Name : "  + element.getElementsByTagName("Name").item(0).getTextContent());
-                System.out.println("Roll No : "   + element.getElementsByTagName("id").item(0).getTextContent());
-                System.out.println("Location : "    + element.getElementsByTagName("location").item(0).getTextContent());
+                Employee employee= Employee.builder()
+                        .firstName(element.getElementsByTagName("firstName").item(0).getTextContent())
+                        .lastName(element.getElementsByTagName("lastName").item(0).getTextContent())
+                        .age(Integer.parseInt(element.getElementsByTagName("age").item(0).getTextContent()))
+                        .djob(element.getElementsByTagName("djob").item(0).getTextContent())
+                        .salary(Double.valueOf(element.getElementsByTagName("salary").item(0).getTextContent()))
+                        .build();
+                employees.add(employee);
             }
         }
+        return employees;
     }
 }

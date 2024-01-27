@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>climax</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Climax</a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Accueil <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="#">Statistiques</a>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container" style="max-width: 500px">
+    <br>
+    <h3 class="mb-3">veillez svp selectionner un fichier</h3>
+    <form
+            id="uploadForm"
+            method="post"
+            th:action="@{/files/upload}"
+            enctype="multipart/form-data">
+        <input id="input-file" type="file" name="file" />
+        <button class="btn btn-sm btn-outline-success float-right" type="submit">
+            Upload
+        </button>
+    </form>
+
+</div>
+
+
+<div class="container">
+    <br>
+    <h6>Contenu du fichier</h6>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Age</th>
+            <th scope="col">proféssion</th>
+            <th scope="col">Salaire</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">Zous</th>
+            <td>Adrien</td>
+            <td>25</td>
+            <td>Informaticien</td>
+            <td>35000</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

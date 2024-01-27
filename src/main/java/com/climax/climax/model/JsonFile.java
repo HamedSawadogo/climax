@@ -4,11 +4,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
-public class JsonFile implements File{
+public class JsonFile extends File{
 
     @Override
-    public void readFile(String filePath) throws IOException, ParseException {
+    public List<Employee> readFile(String filePath) throws IOException, ParseException {
 
         JSONParser parser=new JSONParser();
         Object obj = parser.parse(new FileReader(filePath));
@@ -20,11 +21,14 @@ public class JsonFile implements File{
         Double salaire=(Double) jsonObject.get("salary");
         int age=Integer.parseInt(String.valueOf(jsonObject.get("age")));
 
-        System.out.println("Salaire:  "+salaire);
-        System.out.println("Djob:  "+djob);
-        System.out.println("Age: "+age);
-        System.out.println("Name: " +firstName);
-        System.out.println("lastName:  " +lastName);
+        Employee employee=Employee.builder()
+                .age(age)
+                .firstName(firstName)
+                .lastName(lastName)
+                .djob(djob)
+                .salary(salaire)
+                .build();
 
+        return List.of(employee);
     }
 }
