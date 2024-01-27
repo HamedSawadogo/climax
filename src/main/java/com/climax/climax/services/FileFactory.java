@@ -9,7 +9,7 @@ import com.climax.climax.model.XMLFile;
 public class FileFactory {
 
     public static File createFileReader(String filePath){
-        String ext=FileExtensionsManager.getFileExtension(filePath);
+        String ext=FileManager.getFileExtension(filePath);
         return switch (ext) {
             case "xml" -> new XMLFile();
             case "json" -> new JsonFile();

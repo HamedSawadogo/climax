@@ -4,6 +4,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import com.climax.climax.exceptions.FileNotFoundException;
+import com.climax.climax.services.FileManager;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +18,9 @@ public class JsonFile extends File{
 
     @Override
     public List<Employee> readFile(String filePath) throws IOException, ParseException {
+
+        if(!FileManager.isValidFilePath(filePath))
+           throw new FileNotFoundException("ce fichier n'est pas valide");
         log.info("myFilePath:   "+filePath);
         JSONParser parser=new JSONParser();
         Object obj = parser.parse(new FileReader(filePath));

@@ -29,8 +29,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Map<String, Double> calculateSalaryByDjob() {
-        System.err.println(employees.size());
-        //Renvoie la liste des Employees Par profession
+  
+        if(this.employees.isEmpty())throw new NoSuchElementException("la liste de Employees est vide");
+                //Renvoie la liste des Employees Par profession 
       Map<String,List<Employee>>employeesDjobs=
               this.employees.stream().collect(Collectors.groupingBy(Employee::getDjob));
 

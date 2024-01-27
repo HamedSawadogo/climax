@@ -4,7 +4,7 @@ import com.climax.climax.exceptions.FileNotFoundException;
 import com.climax.climax.metier.ClimaxServiceImpl;
 import com.climax.climax.model.Employee;
 import com.climax.climax.model.File;
-import com.climax.climax.services.FileExtensionsManager;
+import com.climax.climax.services.FileManager;
 import com.climax.climax.services.FileFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
-
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,7 +34,7 @@ public class ClimaxController {
 
     @GetMapping("/")
     public String homePage(Model model){
-        return "home";
+        return "index";
     }
     public String getAbsolutePath(MultipartFile file) throws IOException {
         String uploadedFileName = file.getOriginalFilename();
@@ -44,13 +43,6 @@ public class ClimaxController {
         file.transferTo(tempFile);
         return tempFile.toAbsolutePath().toString();
     }
-
-    @GetMapping("/stat")
-    public String statistiques(Model model){
-        model.addAttribute("moyennesSalariales",employeeDao.calculateSalaryByDjob());
-        return "stat";
-    }
-
     @PostMapping("/files/upload")
     public String uploadFile(Model model,@RequestParam("file") MultipartFile file){
         try {
@@ -74,10 +66,6 @@ public class ClimaxController {
             model.addAttribute("error",e.getMessage());
             return "index";
         }
-        return "index";
-    }
-    @GetMapping("/index")
-    public  String indexPage(){
         return "index";
     }
 }

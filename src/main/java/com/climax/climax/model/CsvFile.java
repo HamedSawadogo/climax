@@ -2,7 +2,6 @@ package com.climax.climax.model;
 
 import com.opencsv.CSVReader;
 import lombok.extern.slf4j.Slf4j;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
