@@ -14,7 +14,7 @@ public class FileFactory {
             case "xml" -> new XMLFile();
             case "json" -> new JsonFile();
             case "csv" -> new CsvFile();
-            default -> throw new FileNotFoundException();
+            default -> throw new FileNotFoundException("ce type de fichier n'est pas supporté");
         };
     }
 }

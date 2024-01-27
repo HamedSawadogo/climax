@@ -1,7 +1,21 @@
 <employees>
     <employee>
         <firstName>John</firstName>
-        <lastName>11001</lastName>
+        <lastName>Hamed</lastName>
+        <age>35</age>
+        <djob>informaticien</djob>
+        <salary>35</salary>
+    </employee>
+    <employee>
+        <firstName>John</firstName>
+        <lastName>Hamed</lastName>
+        <age>35</age>
+        <djob>informaticien</djob>
+        <salary>35</salary>
+    </employee>
+    <employee>
+        <firstName>John</firstName>
+        <lastName>Hamed</lastName>
         <age>35</age>
         <djob>informaticien</djob>
         <salary>35</salary>

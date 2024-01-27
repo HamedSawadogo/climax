@@ -15,8 +15,6 @@
         </div>
     </div>
 </nav>
-
-
 <div class="container" style="max-width: 500px">
     <br>
     <h3 class="mb-3">veillez svp selectionner un fichier</h3>
@@ -25,17 +23,18 @@
             method="post"
             th:action="@{/files/upload}"
             enctype="multipart/form-data">
-        <input id="input-file" type="file" name="file" />
-        <button class="btn btn-sm btn-outline-success float-right" type="submit">
+        <input class="file" id="input-file"  type="file" name="file" />
+        <button  class="btn btn-sm btn-outline-success float-right" type="submit">
             Upload
         </button>
     </form>
 
 </div>
-
-
 <div class="container">
     <br>
+    <strong th:if="${error}">
+        <p th:text="${error}"></p>
+    </strong>
     <h6>Contenu du fichier</h6>
     <table class="table">
         <thead>
@@ -48,17 +47,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">Zous</th>
-            <td>Adrien</td>
-            <td>25</td>
-            <td>Informaticien</td>
-            <td>35000</td>
+        <tr th:if="${employees.empty}">
+            <td colspan="3">Aucun employée en base de données</td>
+        </tr>
+        <tr th:each="employee: ${employees}">
+            <td><span th:text="${employee.firstName}"> Prénom </span></td>
+            <td><span th:text="${employee.firstName}"> Prénom </span></td>
+            <td><span th:text="${employee.age}"> Age </span></td>
+            <td><span th:text="${employee.djob}"> Proféssion </span></td>
+            <td><span th:text="${employee.salary*1000}"> Salaire€ </span></td>
         </tr>
         </tbody>
     </table>
 </div>
-
-
 </body>
 </html>
