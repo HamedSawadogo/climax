@@ -37,7 +37,33 @@ public class CsvFile extends File{
                     .withCSVParser(parser)
                     .build();
 
-            // Read all data at once
+
+            // String csvFile = "employees.csv"; // Chemin vers votre fichier CSV
+            // String[] requiredColumns = {"firstName", "lastName", "age"}; // Colonnes requises
+    
+            // try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
+            //     String[] headers = reader.readNext(); // Lire la première ligne pour obtenir les en-têtes
+    
+            //     // Trouver les index des colonnes requises
+            //     int[] requiredColumnIndexes = new int[requiredColumns.length];
+            //     for (int i = 0; i < requiredColumns.length; i++) {
+            //         for (int j = 0; j < headers.length; j++) {
+            //             if (headers[j].equalsIgnoreCase(requiredColumns[i])) {
+            //                 requiredColumnIndexes[i] = j;
+            //                 break;
+            //             }
+            //         }
+            //     }
+    
+            //     // Lire et afficher les lignes en sélectionnant les colonnes requises
+            //     String[] nextLine;
+            //     while ((nextLine = reader.readNext()) != null) {
+            //         for (int index : requiredColumnIndexes) {
+            //             System.out.print(nextLine[index] + " ");
+            //         }
+            //         System.out.println();
+            //     }       
+        // Read all data at once
             List<String[]> allData = csvReader.readAll();
 
             // print Data
