@@ -3,6 +3,7 @@ import com.climax.climax.dao.EmployeeDaoImpl;
 import com.climax.climax.exceptions.FileNotFoundException;
 import com.climax.climax.metier.ClimaxServiceImpl;
 import com.climax.climax.model.Employee;
+import com.climax.climax.model.File;
 import com.climax.climax.services.FileExtensionsManager;
 import com.climax.climax.services.FileFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,24 +37,36 @@ public class ClimaxController {
     public String homePage(Model model){
         return "home";
     }
+    public String getAbsolutePath(MultipartFile file) throws IOException {
+        String uploadedFileName = file.getOriginalFilename();
+        Path tempDir = Files.createTempDirectory("upload-dir");
+        Path tempFile = tempDir.resolve(Paths.get(uploadedFileName));
+        file.transferTo(tempFile);
+        return tempFile.toAbsolutePath().toString();
+    }
+
+    @GetMapping("/stat")
+    public String statistiques(Model model){
+        model.addAttribute("moyennesSalariales",employeeDao.calculateSalaryByDjob());
+        return "stat";
+    }
 
     @PostMapping("/files/upload")
     public String uploadFile(Model model,@RequestParam("file") MultipartFile file){
-        if(file.isEmpty()){
-            System.err.println("Empty FIle");
-            model.addAttribute("error","veillez bien entrer un fichier valide");
-        }
         try {
-            log.info("Nom de fichier:  "+file.getOriginalFilename());
-            log.info("Format:  "+ FileExtensionsManager.getFileExtension(new File(Objects.requireNonNull(file.getOriginalFilename())).getAbsolutePath()));
+            String absoluteFilePath=getAbsolutePath(file);
 
-            File filePath=new File(Objects.requireNonNull(file.getOriginalFilename()));
-            String absoluteFilePath=filePath.getAbsolutePath();
+            System.err.println(absoluteFilePath);
             ClimaxServiceImpl climaxService=new ClimaxServiceImpl();
-            climaxService.setFile(FileFactory.createFileReader(absoluteFilePath));
+
+            //Creation d'un fichier
+            File fileFactory=FileFactory.createFileReader(absoluteFilePath);
+            climaxService.setFile(fileFactory);
+
             List<Employee>employees=climaxService.readFile(absoluteFilePath);
             employeeDao.addEmployees(employees);
             model.addAttribute("employees",employeeDao.getEmployeesList());
+            model.addAttribute("moyennesSalariales",employeeDao.calculateSalaryByDjob());
 
             model.addAttribute("file",file.getOriginalFilename());
         } catch (IOException | ParserConfigurationException | ParseException |

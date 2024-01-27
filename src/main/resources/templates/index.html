@@ -11,24 +11,43 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="#">Accueil <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Statistiques</a>
+            <a class="nav-item nav-link" href="/stat">Statistiques</a>
         </div>
     </div>
 </nav>
 <div class="container" style="max-width: 500px">
     <br>
     <h3 class="mb-3">veillez svp selectionner un fichier</h3>
+    <strong class="error" style="color:red;"></strong>
     <form
             id="uploadForm"
             method="post"
             th:action="@{/files/upload}"
-            enctype="multipart/form-data">
+            enctype="multipart/form-data"
+            >
         <input class="file" id="input-file"  type="file" name="file" />
-        <button  class="btn btn-sm btn-outline-success float-right" type="submit">
+        <button  class="btn btn-sm btn-outline-success float-right" id="btn" type="submit">
             Upload
         </button>
     </form>
-
+</div>
+<br>
+<div class="container">
+    <h4>Moyenne Salariale par Profession</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Profession</th>
+            <th scope="col">Moyenne par Profession en K €</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${moyennesSalariales}">
+            <td style="font-size: 22px;" th:text="${entry.key}"></td>
+            <td style="color:orange;font-size: 22px;font-weight: bold;"  th:text="${entry.value}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 <div class="container">
     <br>
@@ -36,29 +55,51 @@
         <p th:text="${error}"></p>
     </strong>
     <h6>Contenu du fichier</h6>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Prenom</th>
-            <th scope="col">Age</th>
-            <th scope="col">proféssion</th>
-            <th scope="col">Salaire</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${employees.empty}">
-            <td colspan="3">Aucun employée en base de données</td>
-        </tr>
-        <tr th:each="employee: ${employees}">
-            <td><span th:text="${employee.firstName}"> Prénom </span></td>
-            <td><span th:text="${employee.firstName}"> Prénom </span></td>
-            <td><span th:text="${employee.age}"> Age </span></td>
-            <td><span th:text="${employee.djob}"> Proféssion </span></td>
-            <td><span th:text="${employee.salary*1000}"> Salaire€ </span></td>
-        </tr>
-        </tbody>
-    </table>
+    <div th:unless="${#lists.isEmpty(employees)}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Age</th>
+                <th scope="col">proféssion</th>
+                <th scope="col">Salaire K €</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee: ${employees}">
+                <td><span th:text="${employee.firstName}"> Prénom </span></td>
+                <td><span th:text="${employee.lastName}"> Prénom </span></td>
+                <td><span th:text="${employee.age}"> Age </span></td>
+                <td><span th:text="${employee.djob}"> Proféssion </span></td>
+                <td><span th:text="${employee.salary}"> Salaire€ </span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+<script>
+    let element=document.querySelector('.file');
+    let btn=document.getElementById('btn');
+
+    function isValidExtension(filename, extensions) {
+        const regex = new RegExp('\\.(' + extensions.join('|') + ')$', 'i');
+        return regex.test(filename);
+    } 
+    const validExtensions = ["json", "xml", "csv"];
+    btn.disabled=true;
+    element.addEventListener('change',(e)=>{
+      console.log(e.target.value);
+      if(e.target.value.length>0){
+        if(isValidExtension(e.target.value, validExtensions)){ 
+            document.querySelector(".error").innerHTML="";  
+            btn.disabled=false;
+        }else{
+         btn.disabled=true;
+         document.querySelector(".error").innerHTML="Notre systeme ne supporte pas Encore ce type de fichier";
+        }    
+      }
+    });
+</script>
 </body>
 </html>

@@ -23,6 +23,7 @@ public class ClimaxApplication { public static void main(String[] args) {
         SpringApplication.run(ClimaxApplication.class, args);
     }
 
+    @Bean
     CommandLineRunner commandLineRunner(){
       return args -> {
           ClimaxServiceImpl climaxService=new ClimaxServiceImpl();
@@ -34,11 +35,15 @@ public class ClimaxApplication { public static void main(String[] args) {
 
 
 
-          climaxService.setFile(FileFactory.createFileReader(xmlFile));
-          List<Employee>employees=climaxService.readFile(xmlFile);
-          employees.forEach(employee -> {
+          climaxService.setFile(FileFactory.createFileReader(jsonFile));
+          List<Employee>employeeList=climaxService.readFile(jsonFile);
+
+          employeeList.forEach(employee -> {
               System.err.println(employee.getFirstName());
+              System.err.println(employee.getAge());
+              System.err.println(employee.getLastName());
           });
+
 
 
       };

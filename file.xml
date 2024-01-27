@@ -1,23 +1,51 @@
 <employees>
-    <employee>
-        <firstName>John</firstName>
-        <lastName>Hamed</lastName>
-        <age>35</age>
+    <employee id="234">
+        <firstName>Zous</firstName>
+        <lastName>Adrien</lastName>
+        <age>25</age>
         <djob>informaticien</djob>
         <salary>35</salary>
     </employee>
-    <employee>
-        <firstName>John</firstName>
-        <lastName>Hamed</lastName>
-        <age>35</age>
+    <employee id="993">
+        <firstName>Ducroc</firstName>
+        <lastName>Mathilde</lastName>
+        <age>32</age>
         <djob>informaticien</djob>
-        <salary>35</salary>
+        <salary>38</salary>
     </employee>
-    <employee>
-        <firstName>John</firstName>
-        <lastName>Hamed</lastName>
-        <age>35</age>
-        <djob>informaticien</djob>
-        <salary>35</salary>
+    <employee id="001">
+        <firstName>Joy</firstName>
+        <lastName>Bruno</lastName>
+        <age>29</age>
+        <djob>comptable</djob>
+        <salary>33</salary>
+    </employee>
+    <employee id="002">
+        <firstName>Basr</firstName>
+        <lastName>Julien</lastName>
+        <age>43</age>
+        <djob>policier</djob>
+        <salary>24</salary>
+    </employee>
+    <employee id="003">
+        <firstName>Bouaz</firstName>
+        <lastName>Teff</lastName>
+        <age>52</age>
+        <djob>boulanger</djob>
+        <salary>45</salary>
+    </employee>
+    <employee id="004">
+        <firstName>Leroy</firstName>
+        <lastName>Ben</lastName>
+        <age>48</age>
+        <djob>comptable</djob>
+        <salary>26</salary>
+    </employee>
+    <employee id="005">
+        <firstName>Beroy</firstName>
+        <lastName>Celine</lastName>
+        <age>28</age>
+        <djob>comptable</djob>
+        <salary>37</salary>
     </employee>
 </employees>

@@ -1,12 +1,12 @@
 package com.climax.climax.model;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -17,21 +17,23 @@ public class JsonFile extends File{
         log.info("myFilePath:   "+filePath);
         JSONParser parser=new JSONParser();
         Object obj = parser.parse(new FileReader(filePath));
-        JSONObject jsonObject = (JSONObject)obj;
 
-        String firstName= (String)jsonObject.get("firstName");
-        String  lastName=(String)jsonObject.get("lastName");
-        String djob=(String)jsonObject.get("djob");
-        Double salaire=(Double) jsonObject.get("salary");
-        int age=Integer.parseInt(String.valueOf(jsonObject.get("age")));
 
-        Employee employee=Employee.builder()
-                .age(age)
-                .firstName(firstName)
-                .lastName(lastName)
-                .djob(djob)
-                .salary(salaire)
-                .build();
-        return List.of(employee);
+        JSONArray employeesList=(JSONArray)obj;
+        List<Employee>employees=new ArrayList<>();
+        //Iterate over employee array
+        employeesList.forEach(employeeParam -> {
+            JSONObject employeeObject=(JSONObject)employeeParam;
+            Employee employee=Employee.builder()
+            .age(Integer.parseInt(String.valueOf(employeeObject.get("age"))))
+            .firstName(String.valueOf(employeeObject.get("firstName")))
+            .lastName(String.valueOf(employeeObject.get("lastName")))
+            .djob(String.valueOf(employeeObject.get("djob")))
+            .salary(Double.valueOf(String.valueOf(employeeObject.get("salary"))))
+            .build();
+            //
+            employees.add(employee);
+        });
+        return employees;
     }
 }
