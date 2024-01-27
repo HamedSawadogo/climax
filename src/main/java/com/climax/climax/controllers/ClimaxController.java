@@ -32,10 +32,21 @@ public class ClimaxController {
     @Autowired
     private EmployeeDaoImpl employeeDao;
 
+    /**
+     * 
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String homePage(Model model){
         return "index";
     }
+    /**
+     * 
+     * @param file
+     * @return
+     * @throws IOException
+     */
     public String getAbsolutePath(MultipartFile file) throws IOException {
         String uploadedFileName = file.getOriginalFilename();
         Path tempDir = Files.createTempDirectory("upload-dir");
@@ -43,6 +54,11 @@ public class ClimaxController {
         file.transferTo(tempFile);
         return tempFile.toAbsolutePath().toString();
     }
+    /**
+     * @param model
+     * @param file
+     * @return
+     */
     @PostMapping("/files/upload")
     public String uploadFile(Model model,@RequestParam("file") MultipartFile file){
         try {
@@ -65,7 +81,8 @@ public class ClimaxController {
                  SAXException | FileNotFoundException e) {
             model.addAttribute("error",e.getMessage());
             return "index";
+        }finally{
+            return "index";
         }
-        return "index";
     }
 }

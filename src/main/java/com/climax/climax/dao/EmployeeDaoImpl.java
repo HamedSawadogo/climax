@@ -2,9 +2,7 @@ package com.climax.climax.dao;
 
 import com.climax.climax.model.Employee;
 import org.springframework.stereotype.Component;
-
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Component
@@ -26,6 +24,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee>getEmployeesList() {
         return this.employees;
     }
+    /**
+     * Calculer le salaire des Employees par par profession 
+     */
 
     @Override
     public Map<String, Double> calculateSalaryByDjob() {

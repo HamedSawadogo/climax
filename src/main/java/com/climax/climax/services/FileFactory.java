@@ -8,6 +8,11 @@ import com.climax.climax.model.XMLFile;
 
 public class FileFactory {
 
+    /**
+     * Renvoie une instance de File
+     * @param filePath
+     * @return File
+     */
     public static File createFileReader(String filePath){
         String ext=FileManager.getFileExtension(filePath);
         return switch (ext) {

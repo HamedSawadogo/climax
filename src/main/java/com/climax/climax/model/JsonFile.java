@@ -16,6 +16,10 @@ import java.util.List;
 @Slf4j
 public class JsonFile extends File{
 
+
+    /**
+     * Lire un fichier Json et renvoie la liste des Utilisateurs associés
+     */
     @Override
     public List<Employee> readFile(String filePath) throws IOException, ParseException {
 
