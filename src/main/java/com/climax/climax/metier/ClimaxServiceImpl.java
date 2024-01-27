@@ -1,24 +1,23 @@
 package com.climax.climax.metier;
 import com.climax.climax.model.Employee;
-import com.climax.climax.model.File;
+import com.climax.climax.model.FileFormat;
 import lombok.Setter;
 import org.json.simple.parser.ParseException;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
-
 
 @Setter
 public class ClimaxServiceImpl implements ClimaxService {
 
-    private File file;
+    private FileFormat fileReaderFormat;
+
 
     @Override
     public Set<Employee> readFile(String filePath) throws IOException,
             ParseException, ParserConfigurationException,
-            SAXException {
-       return file.readFile(filePath);
+            SAXException, ClassNotFoundException {
+       return fileReaderFormat.readFile(filePath);
     }
 }

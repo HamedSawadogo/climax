@@ -11,8 +11,8 @@ import java.util.Set;
 
 public interface ClimaxService {
      Set<Employee> readFile(String filePath)
-            throws IOException,
-            ParseException,
-            ParserConfigurationException,
-            SAXException;
+             throws IOException,
+             ParseException,
+             ParserConfigurationException,
+             SAXException, ClassNotFoundException;
 }

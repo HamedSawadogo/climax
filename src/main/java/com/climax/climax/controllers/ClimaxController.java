@@ -3,7 +3,7 @@ import com.climax.climax.dao.EmployeeDaoImpl;
 import com.climax.climax.exceptions.FileNotFoundException;
 import com.climax.climax.metier.ClimaxServiceImpl;
 import com.climax.climax.model.Employee;
-import com.climax.climax.model.File;
+import com.climax.climax.model.FileFormat;
 import com.climax.climax.services.FileManager;
 import com.climax.climax.services.FileFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -69,8 +70,8 @@ public class ClimaxController {
             ClimaxServiceImpl climaxService=new ClimaxServiceImpl();
 
             //Creation d'un fichier
-            File fileFactory=FileFactory.createFileReader(absoluteFilePath);
-            climaxService.setFile(fileFactory);
+            FileFormat fileFactory=FileFactory.createFileReader(absoluteFilePath);
+            climaxService.setFileReaderFormat(fileFactory);
 
             Set<Employee>employees=climaxService.readFile(absoluteFilePath);
             employeeDao.addEmployees(employees);
@@ -82,8 +83,9 @@ public class ClimaxController {
                  SAXException | FileNotFoundException e) {
             model.addAttribute("error",e.getMessage());
             return "index";
-        }finally{
-            return "index";
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
+        return "index";
     }
 }

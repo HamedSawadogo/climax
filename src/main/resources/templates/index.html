@@ -85,7 +85,7 @@
         const regex = new RegExp('\\.(' + extensions.join('|') + ')$', 'i');
         return regex.test(filename);
     } 
-    const validExtensions = ["json", "xml", "csv"];
+    const validExtensions = ["json", "xml", "csv","txt"];
     btn.disabled=true;
     element.addEventListener('change',(e)=>{
       console.log(e.target.value);

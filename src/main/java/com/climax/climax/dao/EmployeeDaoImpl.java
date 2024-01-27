@@ -12,14 +12,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public EmployeeDaoImpl() {
         this.employees = new HashSet<>();
     }
-    //Ajouter Un fichier d'Employee (composé de 1 ou plusieurs Employées)
+    /**
+     * Ajouter Un fichier d'Employee (composé de 1 ou plusieurs Employées)
+     * @param employees
+     */
     @Override
     public void addEmployees(Set<Employee> employees) {
         if(employees.isEmpty())throw new NoSuchElementException("la liste des Employees est vide");
         this.employees.addAll(employees);
     }
-
-    //Renvoie la liste des Employees en Mémoire
+    /**
+     * Renvoie la liste des Employees en Mémoire
+     * @return
+     */
     @Override
     public Set<Employee>getEmployeesList() {
         return this.employees;

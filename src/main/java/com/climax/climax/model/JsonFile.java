@@ -4,19 +4,17 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import com.climax.climax.exceptions.FileNotFoundException;
 import com.climax.climax.services.FileManager;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Slf4j
-public class JsonFile extends File{
+public class JsonFile extends FileFormat{
 
 
     /**

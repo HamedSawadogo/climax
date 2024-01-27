@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * represente l'absraction de Fichier
  */
-public abstract class File {
+public abstract class FileFormat{
 
   /**
    * lectire de fichier
@@ -20,5 +20,5 @@ public abstract class File {
    * @throws SAXException
    */
   public abstract  Set<Employee> readFile(String filePath) throws IOException,
-          ParseException, ParserConfigurationException, SAXException;
+          ParseException, ParserConfigurationException, SAXException, ClassNotFoundException;
 }
