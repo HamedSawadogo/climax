@@ -1,4 +1,6 @@
-package com.climax.climax.model;
+package com.climax.climax.services;
+import com.climax.climax.model.Employee;
+import com.climax.climax.services.FileFormat;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -7,14 +9,13 @@ import org.json.simple.parser.ParseException;
 import com.climax.climax.exceptions.FileNotFoundException;
 import com.climax.climax.services.FileManager;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
 @Slf4j
-public class JsonFile extends FileFormat{
+public class JsonFile extends FileFormat {
 
 
     /**

@@ -1,4 +1,6 @@
-package com.climax.climax.model;
+package com.climax.climax.services;
+import com.climax.climax.model.Employee;
+import com.climax.climax.services.FileFormat;
 import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -8,14 +10,12 @@ import com.climax.climax.services.FileManager;
 
 import javax.xml.parsers.*;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
 @Slf4j
-public class XMLFile extends FileFormat{
+public class XMLFile extends FileFormat {
 
     @Override
     public Set<Employee> readFile(String filePath) throws IOException,

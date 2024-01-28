@@ -1,17 +1,16 @@
 package com.climax.climax;
-
 import com.climax.climax.dao.EmployeeDaoImpl;
 import com.climax.climax.metier.ClimaxServiceImpl;
-import com.climax.climax.model.Employee;
-import com.climax.climax.model.JsonFile;
-import com.climax.climax.model.TextFile;
-import com.climax.climax.model.XMLFile;
+import com.climax.climax.model.*;
+import com.climax.climax.services.CsvFile;
+import com.climax.climax.services.JsonFile;
+import com.climax.climax.services.TextFile;
+import com.climax.climax.services.XMLFile;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -57,6 +56,18 @@ class ClimaxApplicationTests {
             this.climaxService.setFileReaderFormat(new XMLFile());
             this.climaxService.readFile(filePath);
         } catch (IOException | ParseException | ParserConfigurationException | SAXException | ClassNotFoundException e) {
+            fail();
+        }
+    }
+    @Test
+    @DisplayName("test de lecture des fichiers type csv")
+    public void testReadCsvFile() {
+        try {
+            String filePath = BASE_URL + "/file.csv";
+            this.climaxService.setFileReaderFormat(new CsvFile());
+            this.climaxService.readFile(filePath);
+        } catch (IOException | ParseException | ParserConfigurationException | SAXException |
+                 ClassNotFoundException e) {
             fail();
         }
     }

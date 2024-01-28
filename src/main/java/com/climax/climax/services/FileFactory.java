@@ -1,7 +1,6 @@
 package com.climax.climax.services;
 
 import com.climax.climax.exceptions.FileNotFoundException;
-import com.climax.climax.model.*;
 
 public class FileFactory {
 

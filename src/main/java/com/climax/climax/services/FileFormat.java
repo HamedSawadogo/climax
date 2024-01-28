@@ -1,4 +1,5 @@
-package com.climax.climax.model;
+package com.climax.climax.services;
+import com.climax.climax.model.Employee;
 import org.json.simple.parser.ParseException;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;

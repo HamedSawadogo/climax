@@ -1,4 +1,6 @@
-package com.climax.climax.model;
+package com.climax.climax.services;
+import com.climax.climax.model.Employee;
+import com.climax.climax.services.FileFormat;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
@@ -6,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Slf4j
-public class TextFile extends FileFormat{
+public class TextFile extends FileFormat {
     @Override
     public Set<Employee> readFile(String filePath) throws IOException, ClassNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(filePath);

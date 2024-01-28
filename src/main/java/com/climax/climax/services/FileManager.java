@@ -17,6 +17,7 @@ public class FileManager {
      * @throws IOException
      */
     public static String getAbsolutePath(MultipartFile file) throws IOException {
+        if(!isValidFilePath(file.toString()))throw new FileNotFoundException("mauvais fichier");
         String uploadedFileName = file.getOriginalFilename();
         Path tempDir = Files.createTempDirectory("upload-dir");
         Path tempFile = tempDir.resolve(Paths.get(uploadedFileName));
@@ -29,7 +30,7 @@ public class FileManager {
      * @return
      */    
     public static boolean isValidFilePath(String filePath){
-       return !filePath.isEmpty()||filePath.contains(".");
+       return !filePath.isEmpty()&&filePath.contains(".");
     }
     /**
      * renvoie l'extension du fichier en paramètre

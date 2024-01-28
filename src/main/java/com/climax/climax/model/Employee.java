@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,10 +14,15 @@ import java.util.Objects;
 @Data
 public class Employee implements Serializable {
     private String id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private int age;
+    @NotNull
     private Double salary;
+    @NotNull
     private String djob;
 
     @Override

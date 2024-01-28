@@ -3,7 +3,7 @@ import com.climax.climax.dao.EmployeeDaoImpl;
 import com.climax.climax.exceptions.FileNotFoundException;
 import com.climax.climax.metier.ClimaxServiceImpl;
 import com.climax.climax.model.Employee;
-import com.climax.climax.model.FileFormat;
+import com.climax.climax.services.FileFormat;
 import com.climax.climax.services.FileManager;
 import com.climax.climax.services.FileFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -17,13 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @Slf4j
@@ -56,7 +50,6 @@ public class ClimaxController {
     public String uploadFile(Model model,@RequestParam("file") MultipartFile file){
         try {
             String absoluteFilePath=FileManager.getAbsolutePath(file);
-            System.err.println(absoluteFilePath);
             //Creation d'un fichier
             FileFormat fileFactory=FileFactory.createFileReader(absoluteFilePath);
             climaxService.setFileReaderFormat(fileFactory);
