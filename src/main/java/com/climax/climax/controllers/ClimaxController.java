@@ -63,8 +63,6 @@ public class ClimaxController {
             model.addAttribute("error",e.getMessage());
            return  "index";
         }
-
         //Creation d'un fichier
-
     }
 }

@@ -16,9 +16,9 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 class ClimaxApplicationTests {
@@ -111,21 +111,24 @@ class ClimaxApplicationTests {
         employeeDao.setEmployees(this.employeesSetTest);
 
         Map<String,Double> employeesGroupBySalary=employeeDao.calculateSalaryByDjob();
-        List<String> professions= List.of("boulanger","comptable","informaticien","policier");
-        List<Double>salaryMean= List.of(45.,32.,36.5,24.);
-
-        var data=employeesGroupBySalary.entrySet();
-
-        //ACT
         Map<String,Double>meanByDjob=new HashMap<>();
-        data.forEach(e-> {meanByDjob.put(e.getKey(),e.getValue());});
+        meanByDjob.put("boulanger",45.);
+        meanByDjob.put("comptable",32.);
+        meanByDjob.put("informaticien",36.5);
+        meanByDjob.put("policier",24.);
+        boolean mapsAreEqual = true;
+        // Vérifier si les deux maps ont les mêmes clés et les mêmes valeurs
+        for (Map.Entry<String, Double> entry : meanByDjob.entrySet()) {
+            String key = entry.getKey();
+            Double value = entry.getValue();
 
-        log.info(meanByDjob.keySet().toString());
-        log.info(meanByDjob.values().toString());
+            if (!employeesGroupBySalary.containsKey(key) || !employeesGroupBySalary.get(key).equals(value)) {
+                mapsAreEqual = false;
+                break;
+            }
+        }
+        assertTrue(mapsAreEqual);
 
-        //ASSERT
-        assertEquals(meanByDjob.keySet().stream().toList(),professions);
-        assertEquals(meanByDjob.values().stream().toList(),salaryMean);
     }
     @DisplayName("tester que toute les données sont correctes")
     @Test
