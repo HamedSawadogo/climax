@@ -13,8 +13,6 @@ import java.util.regex.Pattern;
 
 @Slf4j
 public class FileManager {
-
-    public static final String REGEX_PATTERN ="^[^\\\\/:*?\"<>|]+$";;
     /**
      * Obtenir le chemin Absolu du fichier
      * @param file

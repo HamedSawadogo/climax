@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 @Component
 public class EmployeeDaoImpl implements EmployeeDao {
     private  Set<Employee>employees;
-
     public EmployeeDaoImpl() {
         this.employees = new HashSet<>();
     }
@@ -34,7 +33,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
     /**
      * Calculer le salaire des Employees par par profession 
      */
-
     @Override
     public Map<String, Double> calculateSalaryByDjob() {
   
