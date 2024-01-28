@@ -16,8 +16,6 @@ import java.util.Set;
 
 @Slf4j
 public class JsonFile implements FileFormat {
-
-
     /**
      * Lire un fichier Json et renvoie la liste des Utilisateurs associés
      */

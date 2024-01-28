@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.regex.Pattern;
 
 public class FileManager {
 
@@ -28,9 +29,12 @@ public class FileManager {
      * vérifier la validité d'un fichier
      * @param filePath
      * @return
-     */    
-    public static boolean isValidFilePath(String filePath){
-       return !filePath.isEmpty()&&filePath.contains(".");
+     */
+    public static boolean isValidFilePath(String fileName) {
+        if(fileName==null)return  false;
+        String regex = "^[a-zA-Z0-9_-]+\\.[a-zA-Z0-9]+$";
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(fileName).matches();
     }
     /**
      * renvoie l'extension du fichier en paramètre
@@ -38,11 +42,13 @@ public class FileManager {
      * @return
      */
     public static String getFileExtension(String fileName) {
-        int lastDotIndex = fileName.lastIndexOf('.');
-        if (lastDotIndex != -1 && lastDotIndex < fileName.length() - 1) {
-            return fileName.substring(lastDotIndex + 1);
-        } else {
-            throw new FileNotFoundException();
-        }
+        if(isValidFilePath(fileName)){
+            int lastDotIndex = fileName.lastIndexOf('.');
+            if (lastDotIndex != -1 && lastDotIndex < fileName.length() - 1) {
+                return fileName.substring(lastDotIndex + 1);
+            } else {
+                throw new FileNotFoundException();
+            }
+        }else{throw new FileNotFoundException("ce fichier est invalide!!!");}
     }
 }

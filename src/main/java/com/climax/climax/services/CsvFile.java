@@ -9,6 +9,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -19,6 +20,9 @@ public class CsvFile implements FileFormat {
     @Override
     public Set<Employee> readFile(String filePath) throws IOException {
 
+        if(FileManager.isValidFilePath(filePath)){
+            throw new FileNotFoundException("ce fichier n'est pas valide!!!");
+        }
         FileReader filereader = new FileReader(filePath);
         CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
         CSVReader csvReader = new CSVReaderBuilder(filereader)
