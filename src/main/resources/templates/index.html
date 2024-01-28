@@ -17,13 +17,18 @@
 <div class="container" style="max-width: 500px">
     <br>
     <h3 class="mb-3">veillez svp selectionner un fichier</h3>
-    <strong class="error" style="color:red;"></strong>
+    <strong class="error" style="color:red;">
+        <br>
+        <strong th:if="${error}">
+            <p style="color:red" th:text="${error}"></p>
+        </strong>
+    </strong>
     <form
-            id="uploadForm"
-            method="post"
-            th:action="@{/files/upload}"
-            enctype="multipart/form-data"
-            >
+        id="uploadForm"
+        method="post"
+        th:action="@{/files/upload}"
+        enctype="multipart/form-data"
+       >
         <input class="file" id="input-file"  type="file" name="file" />
         <button  class="btn btn-sm btn-outline-success float-right" id="btn" type="submit">
             Upload
@@ -49,10 +54,6 @@
     </table>
 </div>
 <div class="container">
-    <br>
-    <strong th:if="${error}">
-        <p th:text="${error}"></p>
-    </strong>
     <h6>Contenu du fichier</h6>
     <div th:unless="${#lists.isEmpty(employees)}">
         <table class="table">
@@ -77,8 +78,5 @@
         </table>
     </div>
 </div>
-<script>
-   
-</script>
 </body>
 </html>

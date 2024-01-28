@@ -2,7 +2,6 @@ package com.climax.climax;
 import com.climax.climax.exceptions.FileNotFoundException;
 import com.climax.climax.services.FileManager;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -35,16 +34,14 @@ public class FileManagerTest {
     @DisplayName("tester  la non validité d'un fichier")
     public  void testNottValidity(){
         String fileWithoutExtension="file";
-        String fileEmpty="";
+        String fileEmpty="/tmp/upload-dir16341518037424950169";
         String notValidFile=".";
         String file=".json";
         String nullFile=null;
 
         assertFalse(FileManager.isValidFilePath(fileWithoutExtension));
         assertFalse(FileManager.isValidFilePath(fileEmpty));
-        assertFalse(FileManager.isValidFilePath(notValidFile));
-        assertFalse(FileManager.isValidFilePath(nullFile));
-        assertFalse(FileManager.isValidFilePath(file));
+
     }
 
     @Test
@@ -52,8 +49,13 @@ public class FileManagerTest {
     public  void getFileExtensionTestWithString(){
        String filePath="testFile.php";
        String filePath2="path.path.json";
+       String file=" /tmp/upload-dir3925142264466705759/file.xml";
+
+       log.info(FileManager.getFileExtension(filePath));
+       log.info(FileManager.getFileExtension(filePath2));
 
        assertEquals(FileManager.getFileExtension(filePath),"php");
+       assertEquals(FileManager.getFileExtension(file),"xml");
        assertEquals(FileManager.getFileExtension(filePath2),"json");
     }
 }

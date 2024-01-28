@@ -1,5 +1,6 @@
 package com.climax.climax.controllers;
 import com.climax.climax.dao.EmployeeDaoImpl;
+import com.climax.climax.exceptions.FileNotFoundException;
 import com.climax.climax.metier.ClimaxServiceImpl;
 import com.climax.climax.model.Employee;
 import com.climax.climax.services.FileFormat;
@@ -16,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Set;
 
 @Slf4j
 @Controller
 public class ClimaxController {
+
+
     @Autowired
     private EmployeeDaoImpl employeeDao;
     @Autowired
@@ -42,30 +44,27 @@ public class ClimaxController {
      */
     @PostMapping("/files/upload")
     public String uploadFile(Model model,@RequestParam("file") MultipartFile file){
-        Set<Employee>employees= null;
-        String absoluteFilePath= null;
         try {
-            //Creation d'un fichier
+            String  absoluteFilePath = FileManager.getAbsolutePath(file);
+            log.info(absoluteFilePath);
             FileFormat fileFactory=FileFactory.createFileReader(absoluteFilePath);
+            log.info(fileFactory.toString());
             climaxService.setFileReaderFormat(fileFactory);
-            absoluteFilePath = FileManager.getAbsolutePath(file);
-            employees = climaxService.readFile(absoluteFilePath);
+
+            Set<Employee>employees=climaxService.readFile(absoluteFilePath);
             employeeDao.addEmployees(employees);
             model.addAttribute("employees",employeeDao.getEmployeesList());
             model.addAttribute("moyennesSalariales",employeeDao.calculateSalaryByDjob());
-
             model.addAttribute("file",file.getOriginalFilename());
+            model.addAttribute("error",null);
             return "index";
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (SAXException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            //Attraper de manière polymorthique l'erreur cas il ya plus de 9 cas d'erreurs possible
+            model.addAttribute("error",e.getMessage());
+           return  "index";
         }
+
+        //Creation d'un fichier
+
     }
 }

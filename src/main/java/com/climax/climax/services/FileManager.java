@@ -1,16 +1,20 @@
 package com.climax.climax.services;
 
 import com.climax.climax.exceptions.FileNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
+@Slf4j
 public class FileManager {
 
+    public static final String REGEX_PATTERN ="^[^\\\\/:*?\"<>|]+$";;
     /**
      * Obtenir le chemin Absolu du fichier
      * @param file
@@ -18,12 +22,15 @@ public class FileManager {
      * @throws IOException
      */
     public static String getAbsolutePath(MultipartFile file) throws IOException {
-        if(!isValidFilePath(file.toString()))throw new FileNotFoundException("mauvais fichier");
-        String uploadedFileName = file.getOriginalFilename();
-        Path tempDir = Files.createTempDirectory("upload-dir");
-        Path tempFile = tempDir.resolve(Paths.get(uploadedFileName));
-        file.transferTo(tempFile);
-        return tempFile.toAbsolutePath().toString();
+        try {
+            String uploadedFileName = file.getOriginalFilename();
+            Path tempDir = Files.createTempDirectory("upload-dir");
+            Path tempFile = tempDir.resolve(Paths.get(uploadedFileName));
+            file.transferTo(tempFile);
+            return tempFile.toAbsolutePath().toString();
+        }catch (Exception e){
+            throw new NoSuchFileException("Une erreur est survenue!!");
+        }
     }
     /**
      * vérifier la validité d'un fichier
@@ -31,10 +38,8 @@ public class FileManager {
      * @return
      */
     public static boolean isValidFilePath(String fileName) {
-        if(fileName==null)return  false;
-        String regex = "^[a-zA-Z0-9_-]+\\.[a-zA-Z0-9]+$";
-        Pattern pattern = Pattern.compile(regex);
-        return pattern.matcher(fileName).matches();
+       if(fileName==null)return false;
+       return  fileName.contains(".");
     }
     /**
      * renvoie l'extension du fichier en paramètre
@@ -42,6 +47,7 @@ public class FileManager {
      * @return
      */
     public static String getFileExtension(String fileName) {
+        log.info("Ce fichier est valide ?: "+isValidFilePath(fileName));
         if(isValidFilePath(fileName)){
             int lastDotIndex = fileName.lastIndexOf('.');
             if (lastDotIndex != -1 && lastDotIndex < fileName.length() - 1) {

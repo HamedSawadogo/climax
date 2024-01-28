@@ -20,7 +20,7 @@ public class CsvFile implements FileFormat {
     @Override
     public Set<Employee> readFile(String filePath) throws IOException {
 
-        if(FileManager.isValidFilePath(filePath)){
+        if(!FileManager.isValidFilePath(filePath)){
             throw new FileNotFoundException("ce fichier n'est pas valide!!!");
         }
         FileReader filereader = new FileReader(filePath);
