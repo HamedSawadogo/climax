@@ -11,15 +11,4 @@ import org.springframework.context.annotation.Bean;
 public class ClimaxApplication { public static void main(String[] args) {
         SpringApplication.run(ClimaxApplication.class, args);
     }
-
-
-    CommandLineRunner commandLineRunner(){
-      return args -> {
-          String txtFile = "C:\\Users\\Hamed\\IdeaProjects\\climax\\file.csv";
-          ClimaxServiceImpl climaxService = new ClimaxServiceImpl();
-          climaxService.setFileReaderFormat(FileFactory.createFileReader(txtFile));
-          climaxService.readFile(txtFile);
-      };
-    }
-
 }
