@@ -1,13 +1,15 @@
 package com.climax.climax.dao;
 
 import com.climax.climax.model.Employee;
+import lombok.Data;
 import org.springframework.stereotype.Component;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Data
 @Component
 public class EmployeeDaoImpl implements EmployeeDao {
-    private final Set<Employee>employees;
+    private  Set<Employee>employees;
 
     public EmployeeDaoImpl() {
         this.employees = new HashSet<>();

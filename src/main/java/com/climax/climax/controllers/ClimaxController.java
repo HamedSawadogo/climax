@@ -30,9 +30,11 @@ import java.util.Set;
 @Controller
 public class ClimaxController {
 
-    //pour l'injection de dépendences
+
     @Autowired
     private EmployeeDaoImpl employeeDao;
+    @Autowired
+    private ClimaxServiceImpl climaxService;
 
     /**
      * 
@@ -55,8 +57,6 @@ public class ClimaxController {
         try {
             String absoluteFilePath=FileManager.getAbsolutePath(file);
             System.err.println(absoluteFilePath);
-            ClimaxServiceImpl climaxService=new ClimaxServiceImpl();
-
             //Creation d'un fichier
             FileFormat fileFactory=FileFactory.createFileReader(absoluteFilePath);
             climaxService.setFileReaderFormat(fileFactory);
