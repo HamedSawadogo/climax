@@ -20,6 +20,6 @@ public abstract class FileFormat{
    * @throws ParserConfigurationException
    * @throws SAXException
    */
-  public abstract  Set<Employee> readFile(String filePath) throws IOException,
+  public abstract Set<Employee> readFile(String filePath) throws IOException,
           ParseException, ParserConfigurationException, SAXException, ClassNotFoundException;
 }
