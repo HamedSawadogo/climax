@@ -16,10 +16,10 @@ public class ClimaxApplication { public static void main(String[] args) {
 
     CommandLineRunner commandLineRunner(){
       return args -> {
-          String txtFile="C:\\Users\\Hamed\\IdeaProjects\\climax\\file.txt";
-          ClimaxServiceImpl climaxService=new ClimaxServiceImpl();
-          climaxService.setFileReaderFormat(FileFactory.createFileReader(txtFile));
-          climaxService.readFile(txtFile);
+//          String txtFile = "C:\\Users\\Hamed\\IdeaProjects\\climax\\file.txt";
+//          ClimaxServiceImpl climaxService = new ClimaxServiceImpl();
+//          climaxService.setFileReaderFormat(FileFactory.createFileReader(txtFile));
+//          climaxService.readFile(txtFile);
       };
     }
 

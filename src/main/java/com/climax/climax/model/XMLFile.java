@@ -21,10 +21,10 @@ public class XMLFile extends FileFormat{
     public Set<Employee> readFile(String filePath) throws IOException,
             ParserConfigurationException, SAXException {
 
-        if(!FileManager.isValidFilePath(filePath)){
+        if (!FileManager.isValidFilePath(filePath)) {
             throw new FileNotFoundException("ce fichier est invalide!!!");
         }
-        log.info("myFilePath:   "+filePath);
+        log.info("myFilePath:   " + filePath);
         DocumentBuilderFactory dBfactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = dBfactory.newDocumentBuilder();
 
@@ -33,23 +33,22 @@ public class XMLFile extends FileFormat{
         NodeList nList = document.getElementsByTagName("employee");
 
 
-        Set<Employee>employeeList=new HashSet<>();
-        for (int i = 0; i < nList.getLength(); i++)
-        {
+        Set<Employee> employeeList = new HashSet<>();
+        for (int i = 0; i < nList.getLength(); i++) {
             Node node = nList.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE)
-            {
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
-                Employee employee= Employee.builder()
-                .id(element.getAttribute("id"))
-                .firstName(element.getElementsByTagName("firstName").item(0).getTextContent())
-                .lastName(element.getElementsByTagName("lastName").item(0).getTextContent())
-                .age(Integer.parseInt(element.getElementsByTagName("age").item(0).getTextContent()))
-                .djob(element.getElementsByTagName("djob").item(0).getTextContent())
-                .salary(Double.valueOf(element.getElementsByTagName("salary").item(0).getTextContent()))
-                .build();
+                Employee employee = Employee.builder()
+                        .id(element.getAttribute("id"))
+                        .firstName(element.getElementsByTagName("firstName").item(0).getTextContent())
+                        .lastName(element.getElementsByTagName("lastName").item(0).getTextContent())
+                        .age(Integer.parseInt(element.getElementsByTagName("age").item(0).getTextContent()))
+                        .djob(element.getElementsByTagName("djob").item(0).getTextContent())
+                        .salary(Double.valueOf(element.getElementsByTagName("salary").item(0).getTextContent()))
+                        .build();
+                log.info(employee.toString());
                 employeeList.add(employee);
-            }else{
+            } else {
                 throw new FileNotFoundException("une Erreur est survenue lors de la lecture de fichier");
             }
         }

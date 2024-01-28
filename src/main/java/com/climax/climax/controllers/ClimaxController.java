@@ -44,18 +44,7 @@ public class ClimaxController {
         return "index";
     }
     /**
-     * 
-     * @param file
-     * @return
-     * @throws IOException
-     */
-    public String getAbsolutePath(MultipartFile file) throws IOException {
-        String uploadedFileName = file.getOriginalFilename();
-        Path tempDir = Files.createTempDirectory("upload-dir");
-        Path tempFile = tempDir.resolve(Paths.get(uploadedFileName));
-        file.transferTo(tempFile);
-        return tempFile.toAbsolutePath().toString();
-    }
+
     /**
      * @param model
      * @param file
@@ -64,8 +53,7 @@ public class ClimaxController {
     @PostMapping("/files/upload")
     public String uploadFile(Model model,@RequestParam("file") MultipartFile file){
         try {
-            String absoluteFilePath=getAbsolutePath(file);
-
+            String absoluteFilePath=FileManager.getAbsolutePath(file);
             System.err.println(absoluteFilePath);
             ClimaxServiceImpl climaxService=new ClimaxServiceImpl();
 

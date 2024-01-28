@@ -23,26 +23,27 @@ public class JsonFile extends FileFormat{
     @Override
     public Set<Employee> readFile(String filePath) throws IOException, ParseException {
 
-        if(!FileManager.isValidFilePath(filePath))
-           throw new FileNotFoundException("ce fichier n'est pas valide");
-        log.info("myFilePath:   "+filePath);
-        JSONParser parser=new JSONParser();
+        if (!FileManager.isValidFilePath(filePath))
+            throw new FileNotFoundException("ce fichier n'est pas valide");
+        log.info("myFilePath:   " + filePath);
+        JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(filePath));
 
 
-        JSONArray employeesList=(JSONArray)obj;
-        
-        Set<Employee>employees=new HashSet<>();
+        JSONArray employeesList = (JSONArray) obj;
+
+        Set<Employee> employees = new HashSet<>();
         //Iterate over employee array
         employeesList.forEach(employeeParam -> {
-            JSONObject employeeObject=(JSONObject)employeeParam;
-            Employee employee=Employee.builder()
-            .age(Integer.parseInt(String.valueOf(employeeObject.get("age"))))
-            .firstName(String.valueOf(employeeObject.get("firstName")))
-            .lastName(String.valueOf(employeeObject.get("lastName")))
-            .djob(String.valueOf(employeeObject.get("djob")))
-            .salary(Double.valueOf(String.valueOf(employeeObject.get("salary"))))
-            .build();
+            JSONObject employeeObject = (JSONObject) employeeParam;
+            Employee employee = Employee.builder()
+                    .age(Integer.parseInt(String.valueOf(employeeObject.get("age"))))
+                    .firstName(String.valueOf(employeeObject.get("firstName")))
+                    .lastName(String.valueOf(employeeObject.get("lastName")))
+                    .djob(String.valueOf(employeeObject.get("djob")))
+                    .salary(Double.valueOf(String.valueOf(employeeObject.get("salary"))))
+                    .build();
+            log.info(employee.toString());
             //
             employees.add(employee);
         });

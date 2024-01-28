@@ -9,10 +9,10 @@ import java.util.Set;
 public class TextFile extends FileFormat{
     @Override
     public Set<Employee> readFile(String filePath) throws IOException, ClassNotFoundException {
-        FileInputStream fileInputStream=new FileInputStream(filePath);
-        ObjectInputStream objectInputStream=new ObjectInputStream(fileInputStream);
+        FileInputStream fileInputStream = new FileInputStream(filePath);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         // Lecture de tous les objets Employee jusqu'à la fin du fichier
-        Set<Employee>employees=new HashSet<>();
+        Set<Employee> employees = new HashSet<>();
         while (true) {
             try {
                 Employee employee = (Employee) objectInputStream.readObject();
