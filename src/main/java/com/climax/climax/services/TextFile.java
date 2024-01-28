@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Slf4j
-public class TextFile extends FileFormat {
+public class TextFile implements FileFormat {
     @Override
     public Set<Employee> readFile(String filePath) throws IOException, ClassNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(filePath);

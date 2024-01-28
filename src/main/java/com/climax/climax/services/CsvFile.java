@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.*;
 
 @Slf4j
-public class CsvFile extends FileFormat {
+public class CsvFile implements FileFormat {
 
     @Override
     public Set<Employee> readFile(String filePath) throws IOException {

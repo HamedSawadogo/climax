@@ -12,7 +12,7 @@ public class ClimaxApplication { public static void main(String[] args) {
         SpringApplication.run(ClimaxApplication.class, args);
     }
 
-    @Bean
+
     CommandLineRunner commandLineRunner(){
       return args -> {
           String txtFile = "C:\\Users\\Hamed\\IdeaProjects\\climax\\file.csv";

@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Slf4j
-public class JsonFile extends FileFormat {
+public class JsonFile implements FileFormat {
 
 
     /**

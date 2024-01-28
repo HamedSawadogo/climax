@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * represente l'absraction de Fichier
  */
-public abstract class FileFormat{
+public interface FileFormat{
 
   /**
    * lectire de fichier
@@ -20,6 +20,5 @@ public abstract class FileFormat{
    * @throws ParserConfigurationException
    * @throws SAXException
    */
-  public abstract Set<Employee> readFile(String filePath) throws IOException,
-          ParseException, ParserConfigurationException, SAXException, ClassNotFoundException;
+  public  Set<Employee> readFile(String filePath) throws IOException, ParseException, ParserConfigurationException, SAXException, ClassNotFoundException;
 }

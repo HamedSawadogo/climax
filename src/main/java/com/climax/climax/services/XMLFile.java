@@ -15,7 +15,7 @@ import java.util.Set;
 
 
 @Slf4j
-public class XMLFile extends FileFormat {
+public class XMLFile implements FileFormat {
 
     @Override
     public Set<Employee> readFile(String filePath) throws IOException,
