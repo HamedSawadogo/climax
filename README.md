@@ -18,6 +18,7 @@
 ### Consignes:
     - lancer l'application port:9001 par défaut 
     - fichier jar: java -jar climax-0.0.1-SNAPSHOT.jar dans  le repertoire target
+    - Vous trouverez un fichier Docker (Dockerfile)
 ### Fichiers de test dans la racine du Projet:
      - file.txt
      - file.csv
