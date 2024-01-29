@@ -21,7 +21,7 @@ public class CsvFile implements FileFormat {
     public Set<Employee> readFile(String filePath) throws IOException {
 
         if(!FileManager.isValidFilePath(filePath)){
-            throw new FileNotFoundException("ce fichier n'est pas valide!!!");
+            throw new FileNotFoundException("ce fichier envoyé n'est pas valide!!!");
         }
         FileReader filereader = new FileReader(filePath);
         CSVParser parser = new CSVParserBuilder().withSeparator(';').build();

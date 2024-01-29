@@ -23,7 +23,7 @@ public class JsonFile implements FileFormat {
     public Set<Employee> readFile(String filePath) throws IOException, ParseException {
 
         if (!FileManager.isValidFilePath(filePath))
-            throw new FileNotFoundException("ce fichier n'est pas valide");
+            throw new FileNotFoundException("ce fichier envoyé n'est pas valide");
         log.info("myFilePath:   " + filePath);
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(filePath));

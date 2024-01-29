@@ -15,7 +15,16 @@ public class ClimaxServiceImpl implements ClimaxService {
 
     private FileFormat fileReaderFormat;
 
-
+    /**
+     *
+     * @param filePath
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws ClassNotFoundException
+     */
     @Override
     public Set<Employee> readFile(String filePath) throws IOException,
             ParseException, ParserConfigurationException,

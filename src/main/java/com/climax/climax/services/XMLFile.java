@@ -22,7 +22,7 @@ public class XMLFile implements FileFormat {
             ParserConfigurationException, SAXException {
 
         if (!FileManager.isValidFilePath(filePath)) {
-            throw new FileNotFoundException("ce fichier est invalide!!!");
+            throw new FileNotFoundException("ce fichier envoyé est invalide!!!");
         }
         log.info("myFilePath:   " + filePath);
         DocumentBuilderFactory dBfactory = DocumentBuilderFactory.newInstance();

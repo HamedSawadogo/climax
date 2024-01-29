@@ -13,7 +13,7 @@ public class TextFile implements FileFormat {
     public Set<Employee> readFile(String filePath) throws IOException, ClassNotFoundException {
 
         if(!FileManager.isValidFilePath(filePath)){
-            throw new FileNotFoundException("ce fichier n'est pas valide");
+            throw new FileNotFoundException("ce fichier envoyé n'est pas valide");
         }
         FileInputStream fileInputStream = new FileInputStream(filePath);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
