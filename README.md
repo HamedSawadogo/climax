@@ -16,14 +16,10 @@
 ![alt text](Screenshot%20from%202024-01-29%2002-26-41.png)
 
 ### Consignes:
-    - avoir au version de java>=17 installé sur votre machine
     - lancer l'application port:9001 par défaut 
-    - tapez: java -jar climax-0.0.1-SNAPSHOT.jar
+    - fichier jar: java -jar climax-0.0.1-SNAPSHOT.jar dans  le repertoire target
 ### Fichiers de test dans la racine du Projet:
      - file.txt
      - file.csv
      - file.json
      - file.xml
-## Resources:
-   - Docummentation du projet
-   - fichier JAR climax-0.0.1-SNAPSHORT.jar
